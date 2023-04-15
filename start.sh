@@ -1,23 +1,29 @@
 #!/usr/bin/env bash
 
-if [[ ! -f acme.json ]]; then
-    touch acme.json
-    chmod 0600 acme.json
+V_ROOT=$( dirname $( readlink -f "$0" ) )
+if [[ -f $V_ROOT/.env ]]; then
+    . $V_ROOT/.env
 fi
 
+echo -e "\033[036m│\033[0m"
+echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
+echo -e "\033[036m│\033[0m"
+
+if [[ ! -f acme.json ]]; then
+    echo -e "\033[036m│\033[0m Creating \033[036macme.json\033[0m"
+    touch acme.json
+    chmod 0600 acme.json
+    ls -la --color | grep --color=always "acme.json"
+    echo -e "\033[036m│\033[0m"
+fi
+
+echo -e "\033[036m│\033[0m Creating the Docker \033[036mweb\033[0m network"
 docker network create web
+echo -e "\033[036m│\033[0m"
 
-docker run -d \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v $PWD/traefik.toml:/traefik.toml \
-  -v $PWD/traefik_dynamic.toml:/traefik_dynamic.toml \
-  -v $PWD/acme.json:/acme.json \
-  -p 80:80 \
-  -p 443:443 \
-  --network web \
-  --name traefik \
-  traefik:v2.3
-
+echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
+docker compose up traefik -d
 docker ps -a | grep "traefik"
+echo -e "\033[036m│\033[0m"
 
 exit 0
