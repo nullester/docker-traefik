@@ -5,6 +5,9 @@ if [[ -f $V_ROOT/.env ]]; then
     . $V_ROOT/.env
 fi
 
+echo
+echo -e "\033[036m┌───────────────────────────────────────────────────────────\033[0m"
+
 echo -e "\033[036m│\033[0m"
 echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
 echo -e "\033[036m│\033[0m"
@@ -17,6 +20,10 @@ if [[ ! -f acme.json ]]; then
     echo -e "\033[036m│\033[0m"
 fi
 
+echo -e "\033[036m│\033[0m Current \033[036mTraefik\033[0m containers"
+docker ps -a | grep --color=always "traefik"
+echo -e "\033[036m│\033[0m"
+
 echo -e "\033[036m│\033[0m Creating the Docker \033[036mweb\033[0m network"
 docker network create web
 echo -e "\033[036m│\033[0m"
@@ -25,5 +32,12 @@ echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
 docker compose up traefik -d
 docker ps -a | grep "traefik"
 echo -e "\033[036m│\033[0m"
+
+echo -e "\033[036m│\033[0m Current \033[036mTraefik\033[0m containers after start"
+docker ps -a | grep --color=always "traefik"
+echo -e "\033[036m│\033[0m"
+
+echo -e "\033[036m└───────────────────────────────────────────────────────────\033[0m"
+echo
 
 exit 0

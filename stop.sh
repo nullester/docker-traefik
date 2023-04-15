@@ -5,6 +5,9 @@ if [[ -f $V_ROOT/.env ]]; then
     . $V_ROOT/.env
 fi
 
+echo
+echo -e "\033[036m┌───────────────────────────────────────────────────────────\033[0m"
+
 echo -e "\033[036m│\033[0m"
 echo -e "\033[036m│\033[0m Stopping all \033[036mTraefik\033[0m containers"
 echo -e "\033[036m│\033[0m"
@@ -39,5 +42,8 @@ echo -e "\033[036m│\033[0m"
 echo -e "\033[036m│\033[0m Current \033[036mTraefik\033[0m images after remove"
 docker image ls | grep --color=always "traefik"
 echo -e "\033[036m│\033[0m"
+
+echo -e "\033[036m└───────────────────────────────────────────────────────────\033[0m"
+echo
 
 exit 0
