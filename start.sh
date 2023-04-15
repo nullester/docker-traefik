@@ -5,6 +5,11 @@ if [[ -f $V_ROOT/.env ]]; then
     . $V_ROOT/.env
 fi
 
+V_ENV="$1"
+if [[ "$V_ENV" == "" ]]; then
+    V_ENV="web"
+fi
+
 echo
 echo -e "\033[036m┌───────────────────────────────────────────────────────────\033[0m"
 
@@ -12,7 +17,7 @@ echo -e "\033[036m│\033[0m"
 echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
 echo -e "\033[036m│\033[0m"
 
-if [[ ! -f acme.json ]]; then
+if [[ "$V_ENV" == "web" && ! -f acme.json ]]; then
     echo -e "\033[036m│\033[0m Creating \033[036macme.json\033[0m"
     touch acme.json
     chmod 0600 acme.json
@@ -29,7 +34,7 @@ docker network create web
 echo -e "\033[036m│\033[0m"
 
 echo -e "\033[036m│\033[0m Starting the \033[036mTraefik\033[0m container"
-docker compose up traefik -d
+docker compose up "traefik-${V_ENV}" -d
 docker ps -a | grep "traefik"
 echo -e "\033[036m│\033[0m"
 

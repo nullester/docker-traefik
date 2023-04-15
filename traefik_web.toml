@@ -1,4 +1,5 @@
 [entryPoints]
+
   [entryPoints.web]
     address = ":80"
     [entryPoints.web.http.redirections.entryPoint]
