@@ -2,25 +2,12 @@ version: '3.3'
 
 services:
 
-  traefik-web:
+  traefik:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
-      - './traefik_web.toml:/traefik.toml'
-      - './traefik_dynamic_web.toml:/traefik_dynamic.toml'
-      - './acme.json:/acme.json'
-    ports:
-      - '80:80'
-      - '443:443'
-    network_mode: web
-    container_name: traefik
-    image: 'traefik:v2.3'
-
-  traefik-test:
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - './traefik_test.toml:/traefik.toml'
-      - './traefik_dynamic_test.toml:/traefik_dynamic.toml'
-      - './acme.json:/acme.json'
+      - './conf/traefik_${ENVIRONMENT:-web}.toml:/traefik.toml'
+      - './conf/traefik_dynamic_${ENVIRONMENT:-web}.toml:/traefik_dynamic.toml'
+      - './conf/acme.json:/acme.json'
     ports:
       - '80:80'
       - '443:443'
