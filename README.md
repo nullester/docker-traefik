@@ -1,7 +1,10 @@
 # traefik
-To use Traefik on Digital Ocean
+
+To use Traefik locally or on Digital Ocean
 
 ## Create a password
+
+This is how to create a password for your user defined in ``conf/traefik_dynamic_web.toml``.
 
 ```sh
 $ sudo apt-get install -y apache2-utils vim

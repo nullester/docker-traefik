@@ -13,7 +13,7 @@
   dashboard = true
 
 [certificatesResolvers.lets-encrypt.acme]
-  email = "no-reply@nullester.be"
+  email = "no-reply@your-domain.com"
   storage = "acme.json"
   [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
 

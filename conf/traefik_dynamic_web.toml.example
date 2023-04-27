@@ -1,10 +1,10 @@
 [http.middlewares.simpleAuth.basicAuth]
   users = [
-    "docker:$apr1$4CRXX0jL$BGxkdEZ5JKqRAsGJ7NKW1/"
+    "admin:your-hash-here"
   ]
 
 [http.routers.api]
-  rule = "Host(`traefik.nullester.be`)"
+  rule = "Host(`traefik.your-domain.com`)"
   entrypoints = ["websecure"]
   middlewares = ["simpleAuth"]
   service = "api@internal"
