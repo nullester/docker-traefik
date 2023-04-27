@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-V_ROOT=$( dirname $( readlink -f "$0" ) )
+# V_ROOT=$( dirname $( readlink -f "$0" ) ) # @todo: doesn't work on Mac
+V_ROOT="."
 if [[ -f $V_ROOT/.env ]]; then
     . $V_ROOT/.env
 fi
