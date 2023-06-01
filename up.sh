@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. includes.sh
+. "$( dirname $( readlink -f "$0" ) )/includes.sh"
 
 F_TFK_DRAW_START
 
@@ -20,7 +20,7 @@ docker network create web
 F_TFK_DRAW_RULER
 
 F_TFK_DRAW_OUT "Starting the \033[036mTraefik\033[0m container"
-docker compose up "traefik" -d
+docker compose  -f "${V_TFK_ROOT}/docker-compose.yaml" up "traefik" -d
 docker ps -a | grep "traefik"
 
 F_TFK_DRAW_RULER
