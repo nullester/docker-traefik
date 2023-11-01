@@ -1,10 +1,10 @@
 [http.middlewares.simpleAuth.basicAuth]
   users = [
-    "admin:your-hash-here"
+    "__ADMIN_USERNAME__:__ADMIN_HASH__"
   ]
 
 [http.routers.api]
-  rule = "Host(`traefik.your-domain.com`)"
+  rule = "Host(`traefik.__YOUR_DOMAIN__`)"
   entrypoints = ["websecure"]
   middlewares = ["simpleAuth"]
   service = "api@internal"

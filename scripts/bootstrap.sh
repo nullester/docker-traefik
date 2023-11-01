@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 V_TFK_ROOT=$( dirname $( readlink -f "$0" ) )
+V_TFK_ROOT=$( realpath "${V_TFK_ROOT}/.." )
 
 function F_TFK_VERIFY_ENV() {
     if [[ -f "${V_TFK_ROOT}/.env" ]]; then
@@ -40,7 +41,12 @@ function F_TFK_VERIFY_ACME() {
 
 function F_TFK_VERIFY_TOMLS() {
     local V_FILE=""
-    for V_FILE in "traefik_dynamic_test.toml" "traefik_dynamic_web.toml" "traefik_test.toml" "traefik_web.toml"; do
+    for V_FILE in \
+        "traefik_dynamic_test.toml" \
+        "traefik_dynamic_web.toml" \
+        "traefik_test.toml" \
+        "traefik_web.toml" \
+    ; do
         if [[ ! -f "${V_TFK_ROOT}/conf/${V_FILE}" ]]; then
             F_TFK_DRAW_OUT "\033[033mWarning: file $V_TFK_ROOT/conf/$V_FILE not found.\033[0m"
             echo -e -n "\033[036m│\033[0m Do you want to create it now? (\033[036my\033[0m/\033[036mN\033[0m) \033[036m"
@@ -59,6 +65,15 @@ function F_TFK_VERIFY_TOMLS() {
                 F_TFK_DRAW_OUT "\033[031mError: creating ${V_TFK_ROOT}/conf/${V_FILE} failed, aborting\033[0m"
                 F_TFK_DRAW_END
                 exit 1
+            else
+                if [[ "$V_FILE" == "traefik_dynamic_web.toml" ]]; then
+                    # @todo: add replacements
+                    touch "${V_TFK_ROOT}/conf/${V_FILE}"
+                fi
+                if [[ "$V_FILE" == "traefik_web.toml" ]]; then
+                    # @todo: add replacements
+                    touch "${V_TFK_ROOT}/conf/${V_FILE}"
+                fi
             fi
         fi
     done

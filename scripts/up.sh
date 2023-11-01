@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-. "$( dirname $( readlink -f "$0" ) )/includes.sh"
+. "$( dirname $( readlink -f "$0" ) )/bootstrap.sh"
 
 F_TFK_DRAW_START
 
-F_TFK_VERIFY_ENV; F_TFK_VERIFY_ACME; F_TFK_VERIFY_TOMLS
+F_TFK_VERIFY_ENV
+F_TFK_VERIFY_ACME
+F_TFK_VERIFY_TOMLS
 
 F_TFK_DRAW_OUT "Starting the \033[036mTraefik\033[0m container with the \033[031m${V_TFK_ENV}\033[0m environment"
 F_TFK_DRAW_RULER
