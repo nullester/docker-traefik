@@ -16,8 +16,8 @@ $ htpasswd -nb username password
 ## Create symlinks
 
 ```sh
-sudo ln -s /home/user/.docker/traefik/up.sh /usr/local/bin/traefik-up
-sudo ln -s /home/user/.docker/traefik/down.sh /usr/local/bin/traefik-down
+sudo ln -s /home/user/.docker/traefik/scripts/up.sh /usr/local/bin/traefik-up
+sudo ln -s /home/user/.docker/traefik/scripts/down.sh /usr/local/bin/traefik-down
 ```
 
 ## Resources
