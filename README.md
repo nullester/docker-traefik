@@ -10,7 +10,7 @@ This is how to create a password for your user defined in ``conf/traefik_dynamic
 
 ```sh
 $ sudo apt-get install -y apache2-utils
-$ htpasswd -nb username password
+$ htpasswd -n username
 ```
 
 ## Create symlinks
