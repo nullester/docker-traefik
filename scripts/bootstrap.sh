@@ -24,7 +24,7 @@ function F_TFK_VERIFY_ENV() {
 }
 
 function F_TFK_VERIFY_ACME() {
-    if [[ "$V_TFK_ENV" == "web" && ! -f "${V_TFK_ROOT}/conf/acme.json" ]]; then
+    if [[ ! -f "${V_TFK_ROOT}/conf/acme.json" ]]; then
         F_TFK_DRAW_OUT "Creating \033[036mconf/acme.json\033[0m"
         touch "$V_TFK_ROOT/conf/acme.json"
         if [[ ! -f "$V_TFK_ROOT/conf/acme.json" ]]; then
