@@ -1,12 +1,19 @@
-[http.middlewares.simpleAuth.basicAuth]
-  users = [
-    "__ADMIN_USERNAME__:__ADMIN_HASH__"
-  ]
+[http]
 
-[http.routers.api]
-  rule = "Host(`traefik.__YOUR_DOMAIN__`)"
-  entrypoints = ["websecure"]
-  middlewares = ["simpleAuth"]
-  service = "api@internal"
-  [http.routers.api.tls]
-    certResolver = "lets-encrypt"
+  [http.middlewares]
+    [http.middlewares.simpleAuth.basicAuth]
+      users = [
+        "__ADMIN_USERNAME__:__ADMIN_HASH__"
+      ]
+    [http.middlewares.redirectHttps.redirectScheme]
+      scheme = "https"
+      permanent = true
+
+  [http.routers]
+    [http.routers.api]
+      rule = "Host(`traefik.__YOUR_DOMAIN__`)"
+      entrypoints = ["websecure"]
+      middlewares = ["simpleAuth"]
+      service = "api@internal"
+      [http.routers.api.tls]
+        certResolver = "lets-encrypt"

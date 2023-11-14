@@ -17,9 +17,11 @@
   storage = "acme.json"
   [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
 
-[providers.docker]
-  watch = true
-  network = "web"
+[providers]
 
-[providers.file]
-  filename = "traefik_dynamic.toml"
+  [providers.docker]
+    watch = true
+    network = "web"
+
+  [providers.file]
+    filename = "traefik_dynamic.toml"
