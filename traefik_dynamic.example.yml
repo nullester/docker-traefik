@@ -1,0 +1,45 @@
+http:
+  middlewares:
+    simpleAuth:
+      basicAuth:
+        users:
+          - "admin:<your-secret-hash-here>"
+    redirect-https:
+      redirectScheme:
+        scheme: "https"
+        permanent: true
+
+  routers:
+    api:
+      rule: "Host(`traefik.yourdomain.com`)"
+      entrypoints:
+        - "websecure"
+      middlewares:
+        - "simpleAuth"
+      service: "api@internal"
+      tls: {}
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/traefik.yourdomain.com.crt
+        keyFile: /certs/traefik.yourdomain.com.key
+
+  certificates:
+    - certFile: /certs/traefik.yourdomain.com.crt
+      keyFile: /certs/traefik.yourdomain.com.key
+      stores:
+        - default
+    - certFile: /certs/subdomain-a.yourdomain.com.crt
+      keyFile: /certs/subdomain-a.yourdomain.com.key
+      stores:
+        - default
+    - certFile: /certs/subdomain-b.yourdomain.com.crt
+      keyFile: /certs/subdomain-b.yourdomain.com.key
+      stores:
+        - default
+    - certFile: /certs/subdomain-c.yourdomain.com.crt
+      keyFile: /certs/subdomain-c.yourdomain.com.key
+      stores:
+        - default

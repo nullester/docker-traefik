@@ -6,18 +6,11 @@ an example.
 
 ## Create a password
 
-This is how to create a password for your user defined in ``conf/traefik_dynamic_web.toml``.
+This is how to create a password for your user defined in ``traefik_dynamic.yml``.
 
 ```sh
 $ sudo apt-get install -y apache2-utils
 $ htpasswd -n username
-```
-
-## Create symlinks
-
-```sh
-sudo ln -s /home/user/.docker/traefik/scripts/up.sh /usr/local/bin/traefik-up
-sudo ln -s /home/user/.docker/traefik/scripts/down.sh /usr/local/bin/traefik-down
 ```
 
 ## Resources

@@ -1,3 +1,5 @@
-/conf/*.*
-!/conf/*.example
+/certs
+/certs/*.*
 /.env
+/traefik_dynamic.yml
+/traefik.yml
